@@ -94,7 +94,7 @@ function setup() {
 
 function createHeader(text, yPos) {
 	let container = new PIXI.Container();
-	let header = new PIXI.Text(text, headingStyle);
+	let header = new PIXI.Text(text, headingStyle,2);
 	header.position.set(border+headerXAdjust,yPos);
 	container.addChild(header);
 	menuContainer.addChild(container);
@@ -123,7 +123,7 @@ function createButton(text,x,y,buttonCol = defaultButtonCol) {
 	buttonContainer.addChild(graphics);
 	buttonContainer.interactive = true;
 	
-	let t = new PIXI.Text(text,buttonTextStyle);
+	let t = new PIXI.Text(text,buttonTextStyle,2);
 	t.tint = disabledCol;
 	//t.position.set(x,y);//
 	graphics.beginFill(buttonCol);

@@ -8,7 +8,7 @@ let app = new PIXI.Application({
 	width: nativeSize,
 	height: nativeSize, 
 	antialias:true,
-	resolution: 1 
+	resolution: 2 
 });
 
 app.renderer.backgroundColor = 0x191919;
@@ -486,7 +486,7 @@ function makeLegalMoveAndReset() {
 	}
 	
 	if (!suddenDeath) {
-		setTimeout(function(){loadPuzzle(puzzleIndex)},resetTime);
+		setTimeout(function(){loadNextPuzzle()},resetTime);
 	}
 	
 }

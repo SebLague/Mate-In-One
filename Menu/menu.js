@@ -307,9 +307,10 @@ function loadpuzzles() {
 	else if (modeIndex == 2)
 		params +="timed=true&resetTimerOnSolve=true&startTime=" + streakModeStartTimeValue + "&suddenDeath=true";
 	
-	let url = "http://www.sebastianlague.site/chess/mate-trainer/" + params;
+	//let url = "http://www.sebastianlague.site/chess/mate-trainer/" + params;
+	let url = "https://seblague.github.io/Mate-In-One/" + params;
 	console.log(url);
-	//window.open(url,"_self");
+	window.open(url,"_self");
 }
 
 

@@ -1,14 +1,14 @@
 // Aliases://
 var TextureCache = PIXI.utils.TextureCache;
 var Point = PIXI.Point;
-var nativeSize = 1920;
+var nativeSize = 800;
 
 let app = new PIXI.Application({ 
 	autoResize: true,
 	width: nativeSize,
 	height: nativeSize, 
 	antialias:true,
-	resolution: 2
+	resolution: 1 
 });
 
 app.renderer.backgroundColor = 0x191919;
@@ -26,18 +26,18 @@ const modeDescriptions = [
 // Appearance:
 const defaultButtonCol = 0x222222;
 const selectedCol = 0xff5959;
-const disabledCol = 0x666666;
+const disabledCol = 0x444444;
 
-let sectionSpacing = 200;//
-let headerSpacing = 120;
+let sectionSpacing = 80;//
+let headerSpacing = 50;
 let headerXAdjust = -20;
-let buttonSpacing = 100;
+let buttonSpacing = 15;
 let border = 100;
 
 const headingStyle = new PIXI.TextStyle({
-    fill: "#ffffff",
+    fill: "#bcbcbc",
     fontFamily: "\"Lucida Console\", Monaco, monospace",
-    fontSize: 80,
+    fontSize: 30,
     fontWeight: "bold",
 	strokeThickness: 0
 });
@@ -45,15 +45,15 @@ const headingStyle = new PIXI.TextStyle({
 const buttonTextStyle = new PIXI.TextStyle({
     fill: "#FFFFFF",
     fontFamily: "\"Lucida Console\", Monaco, monospace",
-    fontSize: 70,
+    fontSize: 25,
     fontWeight: "bold",
 	strokeThickness: 0
 });
 
 const descriptionTextStyle = new PIXI.TextStyle({
-    fill: "#999999",
+    fill: "#777777",
     fontFamily: "\"Lucida Console\", Monaco, monospace",
-    fontSize: 50,
+    fontSize: 15,
     fontWeight: "bold",
 	strokeThickness: 0
 });
@@ -95,7 +95,6 @@ function setup() {
 function createHeader(text, yPos) {
 	let container = new PIXI.Container();
 	let header = new PIXI.Text(text, headingStyle);
-	header.resolution = 2;
 	header.position.set(border+headerXAdjust,yPos);
 	container.addChild(header);
 	menuContainer.addChild(container);
@@ -197,7 +196,7 @@ function createModeSection() {
 	modeButtons[1] = createButtonGroup(1, modeButtons, yPos,"Countdown");
 	modeButtons[2] = createButtonGroup(2, modeButtons, yPos,"Streak");
 	modeDescriptionText = new PIXI.Text("description text", descriptionTextStyle);
-	modeDescriptionText.position.set(modeButtons[0].position.x, modeButtons[0].y + 90)
+	modeDescriptionText.position.set(modeButtons[0].position.x, modeButtons[0].y + 50)
 	menuContainer.addChild(modeDescriptionText);
 	selectButton(modeButtons,0);
 	yPos += modeDescriptionText.height + sectionSpacing;
@@ -308,10 +307,9 @@ function loadpuzzles() {
 	else if (modeIndex == 2)
 		params +="timed=true&resetTimerOnSolve=true&startTime=" + streakModeStartTimeValue + "&suddenDeath=true";
 	
-	//let url = "http://www.sebastianlague.site/chess/mate-trainer/" + params;
-	let url = "https://seblague.github.io/Mate-In-One/" + params;
-	//console.log(url);
-	window.open(url,"_self");
+	let url = "http://www.sebastianlague.site/chess/mate-trainer/" + params;
+	console.log(url);
+	//window.open(url,"_self");
 }
 
 

@@ -8,10 +8,11 @@ let app = new PIXI.Application({
 	width: nativeSize,
 	height: nativeSize, 
 	antialias:true,
+	transparent : true,
 	resolution: 2 
 });
 
-app.renderer.backgroundColor = 0x191919;
+app.renderer.backgroundColor = 0x00000000;
 
 //Add the canvas that Pixi automatically created for you to the HTML document
 document.body.appendChild(app.view);

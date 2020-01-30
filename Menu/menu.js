@@ -8,10 +8,11 @@ let app = new PIXI.Application({
 	width: nativeSize,
 	height: nativeSize, 
 	antialias:true,
+	transparent : true,
 	resolution: 2
 });
 
-app.renderer.backgroundColor = 0x191919;
+app.renderer.backgroundColor = 0x00000000;
 
 //Add the canvas that Pixi automatically created for you to the HTML document
 document.body.appendChild(app.view);
@@ -115,7 +116,7 @@ function createButtonGroup(buttonIndex,buttonArray, y,text) {
 	
 }
 
-function createButton(text,x,y,buttonCol = defaultButtonCol) {
+function createButton(text,x,y,buttonCol = defaultButtonCol, alpha = 1) {
 	let buttonGrowX = 15;//
 	let buttonGrowY = 6;
 	
@@ -127,12 +128,16 @@ function createButton(text,x,y,buttonCol = defaultButtonCol) {
 	let t = new PIXI.Text(text,buttonTextStyle);
 	t.tint = disabledCol;
 	//t.position.set(x,y);//
+	graphics.alpha = alpha;
 	graphics.beginFill(buttonCol);
 	graphics.drawRect(-buttonGrowX,-buttonGrowY,t.width+ buttonGrowX*2,t.height+buttonGrowY*2);
 	
 	buttonContainer.addChild(t);
 	buttonContainer.position.set(x,y);
 	menuContainer.addChild(buttonContainer);
+
+	//buttonContainer.on("pointerover", () => buttonContainer.children[1].tint = 0xffffff);
+	//buttonContainer.on("pointerout", () => buttonContainer.children[1].tint = 0xffffff);
 	
 	return buttonContainer;
 }
@@ -211,8 +216,9 @@ function createTimeSection() {
 	let minus10 = createButton("-10",border,yPos);
 	let minus5 = createButton("-5", minus10.position.x + minus10.width + buttonSpacing, yPos);
 	
-	let timeDisplay = createButton("180 seconds", minus5.position.x + minus5.width + buttonSpacing, yPos, app.renderer.backgroundColor);
-	timeDisplay.children[1].tint = 0x777777;
+	let timeDisplay = createButton("180 seconds", minus5.position.x + minus5.width + buttonSpacing, yPos, 0, 0);
+	timeDisplay.children[1].tint = 0x999999;
+	
 	
 	let plus5 = createButton("+5",timeDisplay.position.x+timeDisplay.width+buttonSpacing,yPos);
 	let plus10 = createButton("+10", plus5.position.x + plus5.width + buttonSpacing, yPos);//
@@ -248,12 +254,17 @@ function createOtherSettingsSection() {
 
 function createBeginButton() {
 	let buttonContainer = createButton("Begin",border,yPos + 25);
-	let beginButtonCol = 0xffffff;
+	let beginButtonCol = 0x79abfc;
 	buttonContainer.children[1].tint = beginButtonCol;
+	buttonContainer.on("pointerover", () => buttonContainer.children[1].tint = 0xbad4ff);
+	buttonContainer.on("pointerout", () => buttonContainer.children[1].tint = beginButtonCol);
+
 	buttonContainer.on("pointerdown", loadpuzzles);
 	buttonContainer.on("pointerdown", () => buttonContainer.children[1].tint = selectedCol);
 	buttonContainer.on("pointerup", () => buttonContainer.children[1].tint = beginButtonCol);
 }
+
+
 
 function displayTimeSection(visible) {
 	if (timeSection != null && timeSection != undefined) {
